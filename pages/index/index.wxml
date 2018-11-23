@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="container">
+  <text>欢迎来到 jsliang 的小程序</text>
+</view>
+
+<view class="list">
+  <text class="list-text">功能列表</text>
+  <view class="list-item" wx:for="{{functionList}}" wx:key="{{functionList.index}}">
+    <view class="list-item-floor-one">
+      <image class="list-item-floor-one-image" src="{{item.iconUrl}}"></image>
+      <navigator class="list-item-floor-one-text" url="{{item.url}}">{{item.name}}</navigator>
+    </view>
+    <view class="list-item-floor-two">
+      <text class="list-item-floor-two-text">{{item.description}}</text>
+    </view>
+  </view>
+</view>

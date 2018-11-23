@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/addressList/addressList",
+    "pages/flexLayout/flexLayout"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "jsliang 的小程序",
+    "navigationBarTextStyle": "black"
+  }
+}

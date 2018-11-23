@@ -1,0 +1,5 @@
+<!--pages/addressList/addressList.wxml-->
+
+<view class="container">
+  <text>通讯录</text>
+</view>

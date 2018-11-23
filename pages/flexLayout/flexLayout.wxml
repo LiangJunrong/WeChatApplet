@@ -1,0 +1,5 @@
+<!--pages/flexLayout/flexLayout.wxml-->
+
+<view class="container">
+  <text>Flex 布局</text>
+</view>

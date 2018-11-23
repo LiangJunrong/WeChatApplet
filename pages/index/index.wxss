@@ -1,0 +1,32 @@
+/**index.wxss**/
+
+.list {
+  margin: 0 50rpx;
+  font-size: 32rpx;
+}
+.list-text {
+  font-weight: bold;
+}
+.list-item {
+  margin-top: 30rpx;
+}
+.list-item-floor-one {
+  display: flex;
+  align-items: center;
+}
+.list-item-floor-one-image {
+  width: 32rpx;
+  height: 32rpx;
+}
+.list-item-floor-one-text {
+  margin-left: 10rpx;
+  color: deepskyblue;
+}
+.list-item-floor-two {
+  text-indent: 1em;
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid #ccc;
+}
+.list-item-floor-two-text {
+  color: rgb(88, 87, 87);
+}
