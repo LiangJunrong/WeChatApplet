@@ -3,12 +3,37 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/addressList/addressList",
-    "pages/flexLayout/flexLayout"
+    "pages/flexLayout/flexLayout",
+    "pages/user/user",
+    "pages/explore/explore"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "jsliang 的小程序",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#d0a763",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./public/img/tabBar_home_nor.png",
+        "selectedIconPath": "./public/img/tabBar_home.png"
+      },
+      {
+        "pagePath": "pages/explore/explore",
+        "text": "探索",
+        "iconPath": "./public/img/tabBar_explore_nor.png",
+        "selectedIconPath": "./public/img/tabBar_explore.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "./public/img/tabBar_user_nor.png",
+        "selectedIconPath": "./public/img/tabBar_user.png"
+      }
+    ]
   }
 }

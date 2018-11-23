@@ -1,2 +1,141 @@
 /* pages/addressList/addressList.wxss */
 
+/* 全局样式 */
+view {
+  box-sizing: border-box;
+}
+.icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+/* 搜索区域 */
+.search-form {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100rpx;
+  font-size: 32rpx;
+  padding: 0 30rpx;
+  
+  /* 绝对定位 - 固定搜索部分 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+}
+.search {
+ width: 60%; 
+}
+.search-model-one {
+  height: 70rpx;
+  line-height: 50rpx;
+  margin: 15rpx 0;
+  padding: 10rpx 0;
+  background: #f5f5f5;
+  text-align: center;
+  border-radius: 50rpx;
+}
+.search-model-one-text {
+  margin-left: 30rpx;
+  color: #9b9b9b;
+  font-size: 30rpx;
+}
+
+.action {
+  width: 39%;
+}
+
+/* 隐藏搜索模式 2 */
+.search-model-two {
+  display: none;
+}
+
+.action-button {
+  display: inline-block;
+  text-align: center;
+  width: 90rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  margin-top: 15rpx;
+  padding: 5rpx 15rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 40rpx;
+}
+.action-add, .action-delete {
+  margin-left: 10rpx;
+}
+
+/* 隐藏完成删除按钮 */
+.action-delete-comfirm {
+  display: none;
+}
+
+/* 联系人列表 */
+.contacts-list {
+  margin-top: 100rpx;
+  margin-bottom: 120rpx;
+}
+.contacts-list-title {
+  box-sizing: border-box;
+  font-size: 24rpx;
+  font-weight: bold;
+  height: 44rpx;
+  line-height: 44rpx;
+  color: #b2b2b2;
+  background: #f5f5f5;
+  border-bottom: 1rpx solid #efefef;
+  padding-left: 30rpx;
+}
+.contacts-list-user {
+  box-sizing: border-box;
+  height: 120rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 27rpx 60rpx 27rpx 30rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+.contacts-list-user-left {
+  display: flex;
+  flex-direction: column;
+}
+.contacts-list-user-left-name {
+  font-size: 30rpx;
+  color: #333333;
+}
+.contacts-list-user-left-phone {
+  font-size: 26rpx;
+  color: #999999;
+}
+.contacts-list-user-right image {
+  width: 32rpx;
+  height: 32rpx;
+}
+.contacts-list-user-right-edit {
+  margin-right: 30rpx;
+}
+.contacts-list-user-right-delete {
+  margin-right: 30rpx;
+}
+
+/* 拼音导航 */
+.pinyin-nav {
+  font-size: 28rpx;
+  line-height: 28rpx;
+  position: fixed;
+  right: 10rpx;
+  top: 9%;
+  height: 80%;
+  text-align: center;
+}
+.pinyin-nav-byte {
+  display: inline-block;
+  width: 30rpx;
+  border-radius: 20rpx;
+  padding: 5rpx 5rpx;
+  margin-top: 3rpx;
+  color: #fff;
+  background: rgb(129, 212, 238);
+}

@@ -1,0 +1,5 @@
+<!--pages/explore/explore.wxml-->
+
+<view class="container">
+  <text>探索页</text>
+</view>

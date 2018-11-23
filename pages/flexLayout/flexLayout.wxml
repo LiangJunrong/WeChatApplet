@@ -3,3 +3,36 @@
 <view class="container">
   <text>Flex 布局</text>
 </view>
+
+<view class="left-and-right-layout">
+  <view class="left-and-right-layout-floor-one">
+    <text>左右布局</text>
+  </view>
+  <view class="left-and-right-layout-floor-two">
+    <text class="left-and-right-layout-floor-two-left">GitHub 地址</text>
+    <navigator class="left-and-right-layout-floor-two-right" url="https://github.com/LiangJunrong/document-library/blob/master/other-library/WeChatApplet/WeChatAppletFunctionList.md">查看详情</navigator>
+  </view>
+</view>
+
+<view class="mixed-layout">
+  <view class="mixed-layout-floor-one">
+    <text>混合布局</text>
+  </view>
+  <view class="mixed-layout-floor-two">
+    <view class="mixed-layout-floor-two-left">
+      <text class="mixed-layout-floor-two-left-title">微信小程序之奇技淫巧</text>
+      <text class="mixed-layout-floor-two-left-author" url="https://github.com/LiangJunrong/document-library/blob/master/other-library/WeChatApplet/WeChatAppletFunctionList.md">作者：jsliang</text>
+    </view>
+    <view class="mixed-layout-floor-two-right">
+      <navigator>查看详情</navigator>
+    </view>
+  </view>
+  <view class="mixed-layout-floor-three">
+    <text>这是一篇专研小程序各种功能实现的文章，例如布局、通讯录、底部导航栏……如果你感觉不错，可以点赞点 Star；如果感觉有错，那就评论区溜达一番，虚心求教，不胜感激~ </text>
+  </view>
+  <view class="mixed-layout-floor-four">
+    <text>2018-11-23</text>
+    <text>2018阅读</text>
+    <text class="mixed-layout-floor-four-classification">#小程序功能清单#</text>
+  </view>
+</view>

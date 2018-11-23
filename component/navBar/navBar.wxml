@@ -1,0 +1,20 @@
+<!--component/navBar/navBar.wxml-->
+
+<!-- 底部导航条 -->
+<view class="navBar">
+  <view class="navBar-item navBar-home" bindtap='goHome'>
+    <image wx:if="{{homeActive}}" src="../../public/img/tabBar_home.png"></image>
+    <image wx:if="{{!homeActive}}" src="../../public/img/tabBar_home_nor.png"></image>
+    <text class="{{homeActive ? 'active-text' : 'nor-active-text'}}">首页</text>
+  </view>
+  <view class="navBar-item navBar-explore" bindtap='goExplore'>
+    <image wx:if="{{exploreActive}}" src="../../public/img/tabBar_explore.png"></image>
+    <image wx:if="{{!exploreActive}}" src="../../public/img/tabBar_explore_nor.png"></image>
+    <text class="{{exploreActive ? 'active-text' : 'nor-active-text'}}">探索</text>
+  </view>
+  <view class="navBar-item navBar-user" bindtap='goUser'>
+    <image wx:if="{{userActive}}" src="../../public/img/tabBar_user.png"></image>
+    <image wx:if="{{!userActive}}" src="../../public/img/tabBar_user_nor.png"></image>
+    <text class="{{userActive ? 'active-text' : 'nor-active-text'}}">我的</text>
+  </view>
+</view>

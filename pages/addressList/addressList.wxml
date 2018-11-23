@@ -1,5 +1,87 @@
 <!--pages/addressList/addressList.wxml-->
 
-<view class="container">
-  <text>通讯录</text>
+<!-- part1 - 搜索区域 -->
+<view class="search-form">
+  <view class="search">
+    <view class="search-model-one">
+      <image class="icon" src="../../public/img/icon_search.png"></image>
+      <text class="search-model-one-text">搜索</text>
+    </view>
+    <view class="search-model-two">
+      <image class="icon" src="../../public/img/icon_search.png"></image>
+      <input placeholder="搜索"></input>
+      <text>取消</text>
+      <text>搜索</text>
+    </view>
+  </view>
+  <view class="action">
+    <text class="action-button action-add">添加</text>
+    <text class="action-button action-delete">删除</text>
+    <text class="action-button action-delete-comfirm">完成</text>
+  </view>
 </view>
+
+<!-- part2 - 搜索结果 -->
+<view class="search-result"></view>
+
+<!-- part3 - 内容区域 -->
+<view class="contacts-list">
+  <view class="contacts-item">
+    <view class="contacts-list-title">
+      <text>J</text>
+    </view>
+    <view class="contacts-list-user">
+      <view class="contacts-list-user-left">
+        <text class="contacts-list-user-left-name">jsliang</text>
+        <text class="contacts-list-user-left-phone">18818881888</text>
+      </view>
+      <view class="contacts-list-user-right">
+        <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
+        <image class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
+      </view>
+    </view>
+  </view>
+   <view class="contacts-item">
+    <view class="contacts-list-title">
+      <text>Z</text>
+    </view>
+    <view class="contacts-list-user">
+      <view class="contacts-list-user-left">
+        <text class="contacts-list-user-left-name">钟青青</text>
+        <text class="contacts-list-user-left-phone">18819991999</text>
+      </view>
+      <view class="contacts-list-user-right">
+        <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
+        <image class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
+      </view>
+    </view>
+    <view class="contacts-list-user">
+      <view class="contacts-list-user-left">
+        <text class="contacts-list-user-left-name">钟天涯</text>
+        <text class="contacts-list-user-left-phone">18817771777</text>
+      </view>
+      <view class="contacts-list-user-right">
+        <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
+        <image class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- part4 - 拼音导航 -->
+<view class="pinyin-nav">
+  <view wx:for="{{letters}}" wx:key="{{letters.index}}">
+    <text class="pinyin-nav-byte" data-byte="{{item}}" bindtap="pingyinNav">{{item}}</text>
+  </view>
+</view>
+
+<!-- part5 - 底部导航 -->
+<view class="bottom-nav">
+  <navBar homeActive="{{homeActive}}"></navBar>
+</view>
+
+<!-- part6 - 新增弹窗 -->
+<view class="add-prompt"></view>
+
+<!-- part7 - 修改弹窗 -->
+<view class="edit-prompt"></view>
