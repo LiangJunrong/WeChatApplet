@@ -318,7 +318,7 @@ Page({
         searchData: searchData
       })
 
-    } else if (this.data.pinyinNavModel) {
+    } else if (this.data.pinyinNavModel) { // 拼音模式上拉
       console.log("\n拼音模式上拉");
     }
   },
