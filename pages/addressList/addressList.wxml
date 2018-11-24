@@ -23,7 +23,7 @@
   </view>
   <!-- 功能区 -->
   <view class="action">
-    <text class="action-button action-add">添加</text>
+    <text class="action-button action-add" bindtap="showAdd">添加</text>
     <text wx:if="{{!deleteModel}}" class="action-button action-delete" bindtap="showDelete">删除</text>
     <text wx:if="{{deleteModel}}" class="action-button action-delete-comfirm" bindtap="showDelete">完成</text>
   </view>
@@ -44,44 +44,24 @@
 </view>
 
 <!-- part3 - 内容区域 -->
-<view class="contacts-list" wx:if="{{normalModel}}">
-  <view class="contacts-item">
-    <view class="contacts-list-title">
-      <text>J</text>
+<view class="contacts-list">
+  <!-- 每组字母数据 -->
+  <view class="contacts-item" wx:for="{{contactsData}}" wx:for-item="contactsDataItem" wx:key="{{contactsDataItem.index}}">
+    <!-- 字母标题 -->
+    <view wx:if="{{!contactsDataItem.users.length < 1}}" class="contacts-list-title">
+      <text>{{contactsDataItem.groupName}}</text>
     </view>
-    <view class="contacts-list-user">
+    <!-- 该组字母的成员 -->
+    <view class="contacts-list-user" wx:for="{{contactsDataItem.users}}" wx:for-item="usersItem" wx:for-index="userIndex" wx:key="{{usersItem.index}}">
+      <!-- 成员信息展示 -->
       <view class="contacts-list-user-left">
-        <text class="contacts-list-user-left-name">jsliang</text>
-        <text class="contacts-list-user-left-phone">18818881888</text>
+        <text class="contacts-list-user-left-name">{{usersItem.userName}}</text>
+        <text class="contacts-list-user-left-phone">{{usersItem.userPhone}}</text>
       </view>
+      <!-- 成员操作 -->
       <view class="contacts-list-user-right">
-        <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
-        <image wx:if="{{deleteModel}}" class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
-      </view>
-    </view>
-  </view>
-   <view class="contacts-item">
-    <view class="contacts-list-title">
-      <text>Z</text>
-    </view>
-    <view class="contacts-list-user">
-      <view class="contacts-list-user-left">
-        <text class="contacts-list-user-left-name">钟青青</text>
-        <text class="contacts-list-user-left-phone">18819991999</text>
-      </view>
-      <view class="contacts-list-user-right">
-        <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
-        <image wx:if="{{deleteModel}}" class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
-      </view>
-    </view>
-    <view class="contacts-list-user">
-      <view class="contacts-list-user-left">
-        <text class="contacts-list-user-left-name">钟天涯</text>
-        <text class="contacts-list-user-left-phone">18817771777</text>
-      </view>
-      <view class="contacts-list-user-right">
-        <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
-        <image wx:if="{{deleteModel}}" class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
+        <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png" bindtap="showEdit" data-groupname="{{contactsDataItem.groupName}}" data-username="{{usersItem.userName}}" data-userphone="{{usersItem.userPhone}}"></image>
+        <image wx:if="{{deleteModel}}" class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png" bindtap="deleteConfirm" data-groupname="{{contactsDataItem.groupName}}" data-username="{{usersItem.userName}}" data-index="{{userIndex}}"></image>
       </view>
     </view>
   </view>
@@ -90,7 +70,7 @@
 <!-- part4 - 拼音导航 -->
 <view class="pinyin-nav">
   <view wx:for="{{letters}}" wx:key="{{letters.index}}">
-    <text class="pinyin-nav-byte" data-byte="{{item}}" bindtap="pingyinNav">{{item}}</text>
+    <text class="pinyin-nav-byte" data-byte="{{item}}" bindtap="pinyinNav">{{item}}</text>
   </view>
 </view>
 
@@ -100,7 +80,47 @@
 </view>
 
 <!-- part6 - 新增弹窗 -->
-<view class="add-prompt"></view>
+<view wx:if="{{addModel}}" class="add-prompt">
+  <!-- 遮罩层 -->
+  <view class="jsliang-mask" bindtap='showAdd'></view>
+  <!-- 弹窗内容 -->
+  <view class="jsliang-alert">
+    <!-- 标题 -->
+    <view class="jsliang-alert-title">
+      <text>添加成员</text>
+      <text class="jsliang-alert-title-close" bindtap='showAdd'>×</text>
+    </view>
+    <!-- 输入内容 -->
+    <view class="jsliang-alert-content">
+      <input type="text" placeholder='请输入姓名' placeholder-class='jsliang-alert-content-user-name-placeholder' name="addUserName" bindinput='getAddUserName' maxlength='11' value="{{addUserName}}"></input>
+      <input type="text" placeholder='请输入电话号码' placeholder-class='jsliang-alert-content-user-phone-placeholder' name="addUserPhone" bindinput='getAddUserPhone' maxlength='11' value="{{addUserPhone}}"></input>
+    </view>
+    <!-- 确定 -->
+    <view class="jsliang-alert-submit" bindtap='addConfirm'>
+      <text>添加</text>
+    </view>
+  </view>
+</view>
 
 <!-- part7 - 修改弹窗 -->
-<view class="edit-prompt"></view>
+<view wx:if="{{editModel}}" class="edit-prompt">
+  <!-- 遮罩层 -->
+  <view class="jsliang-mask" bindtap='showEdit'></view>
+  <!-- 弹窗内容 -->
+  <view class="jsliang-alert">
+    <!-- 标题 -->
+    <view class="jsliang-alert-title">
+      <text>修改成员</text>
+      <text class="jsliang-alert-title-close" bindtap='showEdit'>×</text>
+    </view>
+    <!-- 输入内容 -->
+    <view class="jsliang-alert-content">
+      <input type="text" placeholder='请输入姓名' placeholder-class='jsliang-alert-content-user-name-placeholder' name="editUserName" bindinput='getEditUserName' maxlength='11' value="{{editNewUserName}}"></input>
+      <input type="text" class="input-forbid" placeholder='请输入电话号码' placeholder-class='jsliang-alert-content-user-phone-placeholder' name="editUserPhone" bindinput='getEditUserPhone' maxlength='11' value="{{editUserPhone}}" disabled="disabled"></input>
+    </view>
+    <!-- 确定 -->
+    <view class="jsliang-alert-submit" bindtap='editConfirm'>
+      <text>修改</text>
+    </view>
+  </view>
+</view>

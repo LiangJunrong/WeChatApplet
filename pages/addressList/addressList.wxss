@@ -159,6 +159,84 @@ view {
   margin-right: 30rpx;
 }
 
+/* 弹窗-添加成员 */
+.jsliang-mask {
+  z-index: 998;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #404040;
+  filter: alpha(opacity=90);
+  -ms-filter: "alpha(opacity=90)";
+  opacity: 0.9;
+}
+.jsliang-alert {
+  z-index: 999;
+  position: fixed;
+  top: 15%;
+  left: 9%;
+  width: 620rpx;
+  height: 580rpx;
+  box-shadow: 2rpx 2rpx 4rpx #A0A0A0, -2rpx -2rpx 4rpx #A0A0A0;
+  background-color: #fff;
+  border-radius: 15rpx;
+}
+
+/* 弹窗标题 */
+.jsliang-alert-title {
+  height: 120rpx;
+  line-height: 120rpx;
+  color: #333333;
+  background: #f8f0e3;
+  font-size: 40rpx;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  border-radius: 15rpx;
+}
+.jsliang-alert-title-close {
+  display: inline-block;
+  color: #999999;
+  position: absolute;
+  font-size: 50rpx;
+  right: 40rpx;
+}
+/* 弹窗内容 */
+.jsliang-alert-content {
+  padding: 0 70rpx;
+}
+.jsliang-alert-content input {
+  height: 120rpx;
+  line-height: 120rpx;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+}
+.jsliang-alert-content-user-name-placeholder, .jsliang-alert-content-user-phone-placeholder {
+  font-size: 30rpx;
+  color: #b6b6b6;
+}
+.jsliang-alert-content-user-phone {
+  color: rgb(238, 227, 227);
+}
+.jsliang-alert-submit {
+  font-size: 30rpx;
+  margin: 60rpx auto;
+  text-align: center;
+  width: 400rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #fff;
+  background: deepskyblue;
+  border-radius: 50rpx;
+}
+
+/* 弹窗-修改成员 */
+.input-forbid {
+  color: rgb(202, 196, 196);
+}
+
 /* 联系人列表 */
 .contacts-list {
   margin-top: 100rpx;
