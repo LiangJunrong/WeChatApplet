@@ -2,30 +2,49 @@
 
 <!-- part1 - 搜索区域 -->
 <view class="search-form">
+  <!-- 搜索区 -->
   <view class="search">
-    <view class="search-model-one">
+    <!-- 假的搜索框 -->
+    <view wx:if="{{!searchModel}}" class="search-model search-model-one" bindtap="showSearch">
       <image class="icon" src="../../public/img/icon_search.png"></image>
       <text class="search-model-one-text">搜索</text>
     </view>
-    <view class="search-model-two">
-      <image class="icon" src="../../public/img/icon_search.png"></image>
-      <input placeholder="搜索"></input>
-      <text>取消</text>
-      <text>搜索</text>
+    <!-- 真的搜索框 -->
+    <view wx:if="{{searchModel}}" class="search-model search-model-two">
+      <image class="icon search-model-two-icon" src="../../public/img/icon_search.png"></image>
+      <!-- 多加层 view 的作用是做到 × 的定位作用 -->
+      <view class="search-model-two-form">
+        <input type="text" class="search-model-two-input" placeholder="搜索" focus="{{inputFocus}}" value="{{searchVal}}" bindinput="monitorInputVal"></input>
+        <text wx:if="{{searchVal.length > 0}}" class="clear-input" bindtap="clearInput">×</text>
+      </view>
+      <text wx:if="{{searchVal.length <= 0}}" class="search-model-two-button search-model-two-button-cancel" bindtap="showSearch">取消</text>
+      <text wx:if="{{searchVal.length > 0}}" class="search-model-two-button search-model-two-button-submit" bindtap="searchSubmit">搜索</text>
     </view>
   </view>
+  <!-- 功能区 -->
   <view class="action">
     <text class="action-button action-add">添加</text>
-    <text class="action-button action-delete">删除</text>
-    <text class="action-button action-delete-comfirm">完成</text>
+    <text wx:if="{{!deleteModel}}" class="action-button action-delete" bindtap="showDelete">删除</text>
+    <text wx:if="{{deleteModel}}" class="action-button action-delete-comfirm" bindtap="showDelete">完成</text>
   </view>
 </view>
 
 <!-- part2 - 搜索结果 -->
-<view class="search-result"></view>
+<view wx:if="{{searchModel}}" class="search-result">
+  <view class="search-result-item" wx:for="{{searchData}}" wx:key="{{searchData.index}}">
+    <view class="search-result-item-left">
+      <text class="search-result-item-left-name">{{item.userName}}</text>
+      <text class="search-result-item-left-phone">{{item.userPhone}}</text>
+    </view>
+    <view class="search-result-item-right">
+      <image class="icon search-result-item-right-edit" src="../../public/img/icon_edit.png"></image>
+      <image wx:if="{{deleteModel}}" class="icon search-result-item-right-delete" src="../../public/img/icon_delete.png"></image>
+    </view>
+  </view>
+</view>
 
 <!-- part3 - 内容区域 -->
-<view class="contacts-list">
+<view class="contacts-list" wx:if="{{normalModel}}">
   <view class="contacts-item">
     <view class="contacts-list-title">
       <text>J</text>
@@ -37,7 +56,7 @@
       </view>
       <view class="contacts-list-user-right">
         <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
-        <image class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
+        <image wx:if="{{deleteModel}}" class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
       </view>
     </view>
   </view>
@@ -52,7 +71,7 @@
       </view>
       <view class="contacts-list-user-right">
         <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
-        <image class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
+        <image wx:if="{{deleteModel}}" class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
       </view>
     </view>
     <view class="contacts-list-user">
@@ -62,7 +81,7 @@
       </view>
       <view class="contacts-list-user-right">
         <image class="icon contacts-list-user-right-edit" src="../../public/img/icon_edit.png"></image>
-        <image class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
+        <image wx:if="{{deleteModel}}" class="icon contacts-list-user-right-delete" src="../../public/img/icon_delete.png"></image>
       </view>
     </view>
   </view>
