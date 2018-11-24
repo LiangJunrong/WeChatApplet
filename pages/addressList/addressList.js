@@ -6,13 +6,6 @@ Page({
    */
   data: {
     /**
-     * 拼音导航功能
-     * letters - 导航字母
-     * equipmentOneRpx - 设备中 1rpx 为多少 px
-     */
-    letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-    equipmentOneRpx: '',
-    /**
      * 功能模式
      * normalModel - 正常模式
      * addModel - 新增模式
@@ -70,7 +63,7 @@ Page({
       { groupName: 'Y', users: [] },
       { groupName: 'Z', users: [] }
     ],
-    
+
     /**
      * 新增功能
      * addUserName - 新增的用户名
@@ -261,7 +254,7 @@ Page({
         showCancel: false
       })
     } else { // 添加成功
-      
+
       // 新数据。假设后端接口返回的数据为 newData
       let newData = {
         userName: this.data.addUserName,
@@ -288,7 +281,7 @@ Page({
 
       console.log("新增后数据：");
       console.log(oldData);
-      
+
       this.setData({
         contactsData: oldData,
         normalModel: true,
@@ -409,7 +402,7 @@ Page({
       title: '删除确认',
       content: '是否删除成员【' + e.currentTarget.dataset.username + "】?",
       success: (e) => {
-        
+
         if (e.confirm) { // 如果确认删除
 
           console.log("删除成功!");
@@ -453,7 +446,7 @@ Page({
     let byte = e.currentTarget.dataset.byte;
 
     // 开启 Promise
-    const promise = new Promise( (resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
 
       console.log("\n第一步：清空原数据");
 
@@ -574,8 +567,8 @@ Page({
       let success = true;
       resolve(success);
 
-    }).then( () => {
-      
+    }).then(() => {
+
       console.log("\n第二步：开启拼音导航模式");
 
       this.setData({
@@ -584,8 +577,8 @@ Page({
         firstEntryPinyinModel: false,
       })
 
-    }).then( () => {
-      
+    }).then(() => {
+
       console.log("\n第三步：判断并添加数据");
 
       let data = this.data.contactsData;
@@ -680,7 +673,7 @@ Page({
         contactsData: data,
       })
 
-    }).then( ()=> {
+    }).then(() => {
 
       console.log("\n第四步：滚动页面");
 
@@ -859,6 +852,102 @@ Page({
    */
   onPullDownRefresh: function () {
 
+    if (this.data.pinyinNavModel) { // 拼音下拉刷新
+
+      console.log("\n【API - 拼音下拉刷新】");
+
+      let data = this.data.contactsData;
+      console.log("\n现在的数据有：");
+      console.log(data);
+
+      let newData = [
+        {
+          userName: '阿狸',
+          userPhone: '18811111111',
+          pinyin: 'ali'
+        },
+        {
+          userName: '贝吉塔',
+          userPhone: '18822222222',
+          pinyin: 'beijita'
+        },
+        {
+          userName: '楚怡',
+          userPhone: '18833333333',
+          pinyin: 'chuyi'
+        },
+        {
+          userName: '邓婕',
+          userPhone: '18844444444',
+          pinyin: 'dengjie'
+        },
+        {
+          userName: '尔康',
+          userPhone: '18855555555',
+          pinyin: 'erkang'
+        },
+        {
+          userName: '福狸',
+          userPhone: '18866666666',
+          pinyin: 'fuli'
+        },
+        {
+          userName: '古狸',
+          userPhone: '18877777777',
+          pinyin: 'guli'
+        },
+        {
+          userName: '哈狸',
+          userPhone: '18888888888',
+          pinyin: 'hali'
+        },
+        {
+          userName: 'i狸',
+          userPhone: '18899999999',
+          pinyin: 'ili'
+        },
+        {
+          userName: '激狸',
+          userPhone: '18800000000',
+          pinyin: 'jli'
+        },
+      ]
+      console.log("\n新数据有：");
+      console.log(newData);
+
+      console.log("\n组合数据：");
+      for (let groupInfo in data) { // 循环原数据
+        for (let item in newData) { // 循环新数据
+
+          if (data[groupInfo].groupName == newData[item].pinyin.substr(0, 1).toUpperCase()) { // 如果新数据字母 与 原数据字母相同
+
+            // 清君侧，删除重复数据
+            // 循环用户数据，判断 新数据的用户名 是否存在于用户数据，如果存在则删除之
+            for (let userInfo in data[groupInfo].users) { // 循环用户原数据
+              if (newData.length > 1) {
+                if (data[groupInfo].users[userInfo].userName == newData[item].userName) { // 判断 新数据的用户名 是否存在于原用户数据
+                  newData.splice(item, 1);
+                }
+              }
+            }
+
+            if (newData.length > 1) { // 判断是否还有数据
+              if (data[groupInfo].groupName == newData[item].pinyin.substr(0, 1).toUpperCase()) { // 再判断一次新数据与旧数据字母是否相同
+                console.log("添加到组：【" + data[groupInfo].groupName + "】");
+                data[groupInfo].users.unshift(newData[item]);
+                console.log(data);
+              }
+            }
+
+          }
+        }
+      }
+
+      this.setData({
+        contactsData: data
+      })
+
+    }
   },
 
   /**
@@ -866,11 +955,11 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.normalModel) { // 正常模式上拉
-      
+
       console.log("\n正常模式上拉");
 
       if (!this.data.normalModelNoData) { // 如果还有数据
-        
+
         // 新数据
         let newData = [
           {
@@ -952,7 +1041,7 @@ Page({
           contactsData: oldData,
           normalModelNoData: true
         })
-        
+
       } else { // 如果没数据了
         console.log("正常模式没数据");
       }
@@ -984,7 +1073,81 @@ Page({
       })
 
     } else if (this.data.pinyinNavModel) { // 拼音模式上拉
+      
       console.log("\n拼音模式上拉");
+
+      let data = this.data.contactsData;
+      console.log("\n现在的数据有：");
+      console.log(data);
+
+      let newData = [
+        {
+          userName: 'u狸',
+          userPhone: '18811311131',
+          pinyin: 'uli'
+        },
+        {
+          userName: 'v狸',
+          userPhone: '18811321132',
+          pinyin: 'vli'
+        },
+        {
+          userName: '无狸',
+          userPhone: '18811331133',
+          pinyin: 'wuli'
+        },
+        {
+          userName: '犀狸',
+          userPhone: '18811341134',
+          pinyin: 'xili'
+        },
+        {
+          userName: '毅狸',
+          userPhone: '18811351135',
+          pinyin: 'yili'
+        },
+        {
+          userName: '醉狸',
+          userPhone: '18811361136',
+          pinyin: 'zuili'
+        }
+      ]
+      console.log("\n新数据有：");
+      console.log(newData);
+
+      console.log("\n组合数据：");
+      for (let groupInfo in data) { // 循环原数据
+        for (let item in newData) { // 循环新数据
+
+          if (data[groupInfo].groupName == newData[item].pinyin.substr(0, 1).toUpperCase()) { // 如果新数据字母 与 原数据字母相同
+
+            // 清君侧，删除重复数据
+            // 循环用户数据，判断 新数据的用户名 是否存在于用户数据，如果存在则删除之
+            for (let userInfo in data[groupInfo].users) { // 循环用户原数据
+              console.log(newData);
+              if (newData.length > 1) {
+                if (data[groupInfo].users[userInfo].userName == newData[item].userName) { // 判断 新数据的用户名 是否存在于原用户数据
+                  newData.splice(item, 1);
+                }
+              }
+            }
+
+            if (newData.length > 1) { // 判断是否还有数据
+              if (data[groupInfo].groupName == newData[item].pinyin.substr(0, 1).toUpperCase()) { // 再判断一次新数据与旧数据字母是否相同
+                console.log("添加到组：【" + data[groupInfo].groupName + "】");
+                data[groupInfo].users.push(newData[item]);
+                console.log(data);
+              }
+            }
+
+          }
+        }
+      }
+
+      this.setData({
+        contactsData: data
+      })
+
     }
   },
 
